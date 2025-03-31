@@ -4,11 +4,58 @@
 package org.example;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+//    public String getGreeting() {
+//        return "Hello World!";
+//    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+        String forma1 = args[0];
+        System.out.println(forma1);
+        int dimensao1 = Integer.parseInt(args[1]);
+        System.out.println(dimensao1);
+        if (args.length == 3) {
+            int dimensao2 = Integer.parseInt(args[2]);
+            System.out.println(dimensao2);
+        }
+
+        if (forma1.equals("triangulo")) {
+            for (int i = 1; i <= dimensao1; i++) {
+                System.out.print(" ".repeat(dimensao1 - i));
+                System.out.print("*".repeat(i));
+                System.out.println();
+            }
+        }
+
+        if (forma1.equals("losango")) {
+            int espaco = (dimensao1 - 1) / 2;
+            int asterisco = 1;
+            for (int i = 1; i <= (dimensao1 + 1) / 2; i++) {
+                System.out.print(" ".repeat(espaco));
+                System.out.print("*".repeat(asterisco));
+                System.out.print(" ".repeat(espaco));
+                asterisco += 2;
+                espaco -= 1;
+                System.out.println();
+            }
+
+            asterisco -= 2;
+            espaco += 1;
+
+            for (int i = 1; i <= (dimensao1 - 1) / 2; i++) {
+                asterisco -= 2;
+                espaco += 1;
+                System.out.print(" ".repeat(espaco));
+                System.out.print("*".repeat(asterisco));
+                System.out.print(" ".repeat(espaco));
+                System.out.println();
+
+            }
+        }
+
+
+
+
+        // System.out.println(new App().getGreeting());
     }
 }
