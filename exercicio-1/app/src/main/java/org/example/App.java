@@ -10,16 +10,30 @@ public class App {
 
     public static void main(String[] args) {
 
-        String forma1 = args[0];
-        System.out.println(forma1);
-        int dimensao1 = Integer.parseInt(args[1]);
-        System.out.println(dimensao1);
-        if (args.length == 3) {
-            int dimensao2 = Integer.parseInt(args[2]);
-            System.out.println(dimensao2);
+        if (args.length < 2 || args.length > 3) {
+            System.out.println("Parâmetros incorretos.");
+            return;
         }
 
-        if (forma1.equals("triangulo")) {
+        String forma = "";
+        int dimensao1 = 0;
+        int dimensao2 = 0;
+        int contagemDimensao = 0;
+
+        for (String arg : args) {
+            try {
+                if (contagemDimensao == 0) {
+                    dimensao1 = Integer.parseInt(arg);
+                } else {
+                    dimensao2 = Integer.parseInt(arg);
+                }
+                contagemDimensao++;
+            } catch (NumberFormatException e) {
+                forma = arg;
+            }
+        }
+
+        if (forma.equals("triangulo")) {
             for (int i = 1; i <= dimensao1; i++) {
                 System.out.print(" ".repeat(dimensao1 - i));
                 System.out.print("*".repeat(i));
@@ -27,33 +41,42 @@ public class App {
             }
         }
 
-        if (forma1.equals("losango")) {
+        if (forma.equals("losango")) {
             int espaco = (dimensao1 - 1) / 2;
             int asterisco = 1;
-            for (int i = 1; i <= (dimensao1 + 1) / 2; i++) {
+            int contadorSuperior = (dimensao1 + 1) / 2;
+            int contadorInferior = (dimensao1 - 1) / 2;
+
+            for (int i = 1; i <= contadorSuperior; i++) {
                 System.out.print(" ".repeat(espaco));
                 System.out.print("*".repeat(asterisco));
                 System.out.print(" ".repeat(espaco));
-                asterisco += 2;
-                espaco -= 1;
+                if (i < contadorSuperior) {
+                    asterisco += 2;
+                    espaco -= 1;
+                }
                 System.out.println();
             }
 
-            asterisco -= 2;
-            espaco += 1;
-
-            for (int i = 1; i <= (dimensao1 - 1) / 2; i++) {
+            for (int i = 1; i <= contadorInferior; i++) {
                 asterisco -= 2;
                 espaco += 1;
                 System.out.print(" ".repeat(espaco));
                 System.out.print("*".repeat(asterisco));
                 System.out.print(" ".repeat(espaco));
                 System.out.println();
-
             }
         }
 
-
+        if (forma.equals("retangulo")) {
+            System.out.println("*".repeat(dimensao1));
+            for (int i = 1; i <= dimensao2 - 2; i++) {
+                System.out.print("*");
+                System.out.print(" ".repeat(dimensao1 - 2));
+                System.out.println("*");
+            }
+            System.out.println("*".repeat(dimensao1));
+        }
 
 
         // System.out.println(new App().getGreeting());
