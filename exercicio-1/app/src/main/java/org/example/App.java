@@ -5,6 +5,7 @@ package org.example;
 
 public class App {
 
+    // Exibir o triângulo
     public String triangulo(int dimensao1) {
         String resultado = "";
         for (int i = 1; i <= dimensao1; i++) {
@@ -15,6 +16,7 @@ public class App {
         return resultado;
     }
 
+    // Exibir o losango
     public String losango(int dimensao1) {
         String resultado = "";
         int espaco = (dimensao1 - 1) / 2;
@@ -44,6 +46,7 @@ public class App {
         return resultado;
     }
 
+    // Exibir o retângulo
     public String retangulo(int dimensao1, int dimensao2) {
         String resultado = "";
         resultado += "*".repeat(dimensao1) + "\n";
@@ -58,16 +61,20 @@ public class App {
 
     public static void main(String[] args) {
 
+        // Verifica se o usuário informou 2 ou 3 parâmetros
         if (args.length < 2 || args.length > 3) {
             System.out.println("Parâmetros incorretos.");
             return;
         }
 
+        // Define as variáveis principais
         String forma = "";
         int dimensao1 = 0;
         int dimensao2 = 0;
         int contagemDimensao = 0;
 
+        // Atribui os argumentos inseridos pelo usuário (lista args), em qualquer ordem,
+        // às respectivas variáveis
         for (String arg : args) {
             try {
                 if (contagemDimensao == 0) {
@@ -81,6 +88,8 @@ public class App {
             }
         }
 
+        // Exibe cada forma segundo os argumentos fornecidos.
+        // Exibe uma mensagem de erro caso de acordo com cada caso.
         if (forma.equals("triangulo")) {
             if (dimensao1 > 2) {
                 System.out.println(new App().triangulo(dimensao1));
