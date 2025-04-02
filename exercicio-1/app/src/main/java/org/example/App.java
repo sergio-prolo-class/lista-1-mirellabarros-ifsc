@@ -4,9 +4,57 @@
 package org.example;
 
 public class App {
-//    public String getGreeting() {
-//        return "Hello World!";
-//    }
+
+    public String triangulo(int dimensao1) {
+        String resultado = "";
+        for (int i = 1; i <= dimensao1; i++) {
+            resultado += " ".repeat(dimensao1 - i);
+            resultado += "*".repeat(i);
+            resultado += "\n";
+        }
+        return resultado;
+    }
+
+    public String losango(int dimensao1) {
+        String resultado = "";
+        int espaco = (dimensao1 - 1) / 2;
+        int asterisco = 1;
+        int contadorSuperior = (dimensao1 + 1) / 2;
+        int contadorInferior = (dimensao1 - 1) / 2;
+
+        for (int i = 1; i <= contadorSuperior; i++) {
+            resultado += " ".repeat(espaco);
+            resultado += "*".repeat(asterisco);
+            resultado += " ".repeat(espaco);
+            if (i < contadorSuperior) {
+                asterisco += 2;
+                espaco -= 1;
+            }
+            resultado += "\n";
+        }
+
+        for (int i = 1; i <= contadorInferior; i++) {
+            asterisco -= 2;
+            espaco += 1;
+            resultado += " ".repeat(espaco);
+            resultado += "*".repeat(asterisco);
+            resultado += " ".repeat(espaco);
+            resultado += "\n";
+        }
+        return resultado;
+    }
+
+    public String retangulo(int dimensao1, int dimensao2) {
+        String resultado = "";
+        resultado += "*".repeat(dimensao1) + "\n";
+        for (int i = 1; i <= dimensao2 - 2; i++) {
+            resultado += "*";
+            resultado += " ".repeat(dimensao1 - 2);
+            resultado += "*\n";
+        }
+        resultado += "*".repeat(dimensao1) + "\n";
+        return resultado;
+    }
 
     public static void main(String[] args) {
 
@@ -34,51 +82,25 @@ public class App {
         }
 
         if (forma.equals("triangulo")) {
-            for (int i = 1; i <= dimensao1; i++) {
-                System.out.print(" ".repeat(dimensao1 - i));
-                System.out.print("*".repeat(i));
-                System.out.println();
+            if (dimensao1 > 2) {
+                System.out.println(new App().triangulo(dimensao1));
+            } else {
+                System.out.println("Informe uma dimensão maior que 2.");
             }
+        } else if (forma.equals("losango")) {
+            if (dimensao1 >= 3 && dimensao1 % 2 == 1) {
+                System.out.println(new App().losango(dimensao1));
+            } else {
+                System.out.println("É necessário informar um número ímpar maior ou igual a 3.");
+            }
+        } else if (forma.equals("retangulo")) {
+            if (dimensao1 > 2 && dimensao2 > 2) {
+                System.out.println(new App().retangulo(dimensao1, dimensao2));
+            } else {
+                System.out.println("Informe uma dimensão maior que 2.");
+            }
+        } else {
+            System.out.println("Forma não encontrada: " + forma);
         }
-
-        if (forma.equals("losango")) {
-            int espaco = (dimensao1 - 1) / 2;
-            int asterisco = 1;
-            int contadorSuperior = (dimensao1 + 1) / 2;
-            int contadorInferior = (dimensao1 - 1) / 2;
-
-            for (int i = 1; i <= contadorSuperior; i++) {
-                System.out.print(" ".repeat(espaco));
-                System.out.print("*".repeat(asterisco));
-                System.out.print(" ".repeat(espaco));
-                if (i < contadorSuperior) {
-                    asterisco += 2;
-                    espaco -= 1;
-                }
-                System.out.println();
-            }
-
-            for (int i = 1; i <= contadorInferior; i++) {
-                asterisco -= 2;
-                espaco += 1;
-                System.out.print(" ".repeat(espaco));
-                System.out.print("*".repeat(asterisco));
-                System.out.print(" ".repeat(espaco));
-                System.out.println();
-            }
-        }
-
-        if (forma.equals("retangulo")) {
-            System.out.println("*".repeat(dimensao1));
-            for (int i = 1; i <= dimensao2 - 2; i++) {
-                System.out.print("*");
-                System.out.print(" ".repeat(dimensao1 - 2));
-                System.out.println("*");
-            }
-            System.out.println("*".repeat(dimensao1));
-        }
-
-
-        // System.out.println(new App().getGreeting());
     }
 }
