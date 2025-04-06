@@ -114,12 +114,15 @@ public class App {
             }
         }
 
+        // Separa os valores da resistência e da tolerância pelo ponto da casa decimal
         String[] vetorResistenciaFinal = Double.toString(resistencia).split("\\.");
         String[] vetorToleranciaFinal = Double.toString(tolerancia).split("\\.");
 
+        // Monta parte do resultado para o usuário inserindo a vírgula como separador decimal
         String stringResultadoP1 = vetorResistenciaFinal[1].equals("0") ? vetorResistenciaFinal[0] : vetorResistenciaFinal[0] + "," + vetorResistenciaFinal[1];
-        String stringResultadoP2 = vetorToleranciaFinal[0] + "," + vetorToleranciaFinal[1];
+        String stringResultadoP2 = vetorToleranciaFinal[1].equals("0") ? vetorToleranciaFinal[0] : vetorToleranciaFinal[0] + "," + vetorToleranciaFinal[1];
 
+        // Escreve o resultado final na tela
         System.out.println(stringResultadoP1 + " " + vetorAbreviacoes[contador] + " Ohms (+- " + stringResultadoP2 + "%)");
 
     }
