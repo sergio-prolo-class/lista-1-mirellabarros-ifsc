@@ -33,4 +33,9 @@ java {
 application {
     // Define the main class for the application.
     mainClass = 'org.example.App'
+    applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
