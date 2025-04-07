@@ -74,7 +74,7 @@ public class App {
         double[] vetorTolerancia = {0, 1, 2, -1, -1, 0.5, 0.25, 0.1, 0.05, -1, 5, 10};
 
         // Inicializa um vetor com as abreviações da notação científica
-        String[] vetorAbreviacoes = {"", "K", "M", "G", "T", "", "", "", "", "", "m", "µ"};
+        String[] vetorAbreviacoes = {"", "K", "M", "G", "T", "", "", "", "", "", "da", "c"};
 
         // Relaciona as cores aos valores e salva no vetor resistor
         for (int i = 0; i < args.length; i++) {
@@ -106,10 +106,12 @@ public class App {
                 resistencia = resistencia / 1000;
                 contador++;
             }
-        } else {
+        }
+
+        if (resistor[2] >= 10) {
             contador = 9;
-            while (resistencia >= 10) {
-                resistencia = resistencia / 10;
+            while (resistencia <= 10) {
+                resistencia = resistencia * 10;
                 contador++;
             }
         }
