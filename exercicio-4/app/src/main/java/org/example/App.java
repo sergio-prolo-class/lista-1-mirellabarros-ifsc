@@ -3,12 +3,17 @@
  */
 package org.example;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.util.Scanner;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+        Scanner entrada = new Scanner(System.in);
+
+        // Enquanto houver nova linha
+        while(entrada.hasNext()){
+            String linha = entrada.nextLine();
+            System.out.println(linha);
+        }
     }
 }
