@@ -6,14 +6,105 @@ package org.example;
 import java.util.Scanner;
 
 public class App {
+
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
 
-        // Enquanto houver nova linha
-        while(entrada.hasNext()){
+        // Define uma matriz 10x10 (tabuleiro)
+        char[][] tabuleiro = new char[10][10];
+        char[] caracteresValidos = {'P', 'E', 'C', 'S', 'N'};
+
+        // Define uma flag para identificar se a matriz é válida
+        boolean tabuleiroValido = true;
+
+        // VERIFICAÇÃO 1
+        // Verifica se tem a dimensão correta de 10×10 casas
+        for (int i = 0; i < 10; i++) {
+            // Verifica se existe a próxima linha
+            if (!entrada.hasNextLine()) {
+                tabuleiroValido = false;
+                break;
+            }
             String linha = entrada.nextLine();
-            System.out.println(linha);
+
+            if (linha.length() != 10) {
+                tabuleiroValido = false;
+                break;
+            }
+
+            for (int j = 0; j < 10; j++) {
+                tabuleiro[i][j] = linha.charAt(j);
+            }
+        }
+
+        // Verifica se há mais linhas do que o esperado
+        if (entrada.hasNextLine()) {
+            tabuleiroValido = false;
+        }
+
+        // VERIFICAÇÃO 2
+        // Verifica se inclui navios inexistentes
+        // Percorre todas as posições em busca de um caractere que não esteja na lista caracteresValidos
+        sairValidacao2:
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                for (int k = 0; k < caracteresValidos.length; k++) {
+                    // Percorre a lista caracteresValidos e compara com cada posição da matriz
+                    if (tabuleiro[i][j] == caracteresValidos[k] || tabuleiro[i][j] == '.') {
+                        tabuleiroValido = true;
+                        break;
+                    } else if (k == caracteresValidos.length -1) {
+                        // Se chegou na última posição de caracteresValidos e não saiu do loop,
+                        // significa que o caractere da posição é invalido. A verificação é interrompida.
+                        tabuleiroValido = false;
+                        break sairValidacao2;
+                    }
+                }
+            }
+        }
+
+        // VERIFICAÇÃO 3
+        // Verifica se o tabuleiro possui um navio de cada tipo
+        // Cada posição do vetor naviosEncontrados é a posição do vetor
+        // caracteresValidos 'P', 'E', 'C', 'S', 'N'
+        // Se alguma posição for igual a zero, significa que o navio não está presente no tabuleiro.
+        int[] naviosEncontrados = new int[5];
+        sairValidacao3:
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                for (int k = 0; k < caracteresValidos.length; k++) {
+                    // Percorre a lista caracteresValidos e compara com cada posição da matriz
+                    if (tabuleiro[i][j] == caracteresValidos[k]) {
+                        naviosEncontrados[k]++;
+                    }
+                }
+            }
+        }
+        // Percorre o vetor naviosEncontrados em busca de um valor zero
+        for (int naviosEncontrado : naviosEncontrados) {
+            if (naviosEncontrado == 0) {
+                tabuleiroValido = false;
+                break;
+            }
+        }
+
+        // VERIFICAÇÃO 4
+        // Verifica se há mais de um navio do mesmo tipo a partir do tamanho de cada navio
+        // É possível verificar também se os navios estão com o tamanho correto
+        int[] tamanhoNavio = {5, 4, 3, 3, 2};
+        for (int i = 0; i < naviosEncontrados.length; i++) {
+            if (naviosEncontrados[i] != tamanhoNavio[i]) {
+                tabuleiroValido = false;
+                break;
+            }
+        }
+
+        // Exibir resultado
+        if (tabuleiroValido) {
+            System.out.println("Tabuleiro válido!");
+        } else {
+            System.out.println("Tabuleiro inválido!");
         }
     }
 }
