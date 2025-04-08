@@ -70,7 +70,6 @@ public class App {
         // caracteresValidos 'P', 'E', 'C', 'S', 'N'
         // Se alguma posição for igual a zero, significa que o navio não está presente no tabuleiro.
         int[] naviosEncontrados = new int[5];
-        sairValidacao3:
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 for (int k = 0; k < caracteresValidos.length; k++) {
