@@ -125,7 +125,7 @@ public class App {
         String stringResultadoP2 = vetorToleranciaFinal[1].equals("0") ? vetorToleranciaFinal[0] : vetorToleranciaFinal[0] + "," + vetorToleranciaFinal[1];
 
         // Escreve o resultado final na tela
-        System.out.println(stringResultadoP1 + " " + vetorAbreviacoes[contador] + " Ohms (+- " + stringResultadoP2 + "%)");
+        System.out.println("Resistência: " + stringResultadoP1 + " " + vetorAbreviacoes[contador] + " Ohms (+- " + stringResultadoP2 + "%)");
 
     }
 }
